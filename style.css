@@ -1,0 +1,44 @@
+body {
+}
+
+#content {
+  text-align: center;
+}
+
+#grid {
+  width: 400px;
+  height: 400px;
+  display: inline-flex;
+  background-color: black;
+}
+
+.block {
+  width: 20px;
+  height: 20px;
+}
+.snakeHeadUp {
+  border-top: dashed red;
+  background-color: rgb(15, 215, 69);
+}
+.snakeHeadDown {
+  border-bottom: dashed red;
+  background-color: rgb(15, 215, 69);
+}
+.snakeHeadRight {
+  border-right: dashed red;
+  background-color: rgb(15, 215, 69);
+}
+.snakeHeadLeft {
+  border-left: dashed red;
+  background-color: rgb(15, 215, 69);
+}
+.snakeBody {
+  background-color: rgb(15, 215, 69);
+}
+.snakeTail {
+  background-color: rgb(15, 215, 69);
+}
+
+.bite {
+  background-color: rgb(229, 134, 9);
+}
