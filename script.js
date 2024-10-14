@@ -14,44 +14,32 @@ let headPosition = [boardSize / 2, boardSize / 2]
 let snakeBody = []
 let bitePosition = []
 let biteTimeCounter=0
+let touchstartX = 0
+let touchendX = 0
+    
 ///////////////Listeners//////////////////
 document.addEventListener('keydown', function (event) {
-  if (event.key == 'ArrowLeft' || event.key == 'ArrowRight') {
-    if (gameStarted == false) {
-      setStartValues()
-      intervalId = window.setInterval(function () {
-        snakeMoving()
-        showBites()
-      }, 110)
-    } else {
-      snakeDirection(event.key)
-    }
-  }
+  userInput(event.key)
 })
-document.addEventListener('swiped-left', function(event) {
-  if (event.key == 'ArrowLeft' || event.key == 'ArrowRight') {
-    if (gameStarted == false) {
-      setStartValues()
-      intervalId = window.setInterval(function () {
-        snakeMoving()
-        showBites()
-      }, 110)
-    } else {
-      snakeDirection(event.key)
-    }
-  }});
-document.addEventListener('swiped-right', function(event) {
-  if (event.key == 'ArrowLeft' || event.key == 'ArrowRight') {
-    if (gameStarted == false) {
-      setStartValues()
-      intervalId = window.setInterval(function () {
-        snakeMoving()
-        showBites()
-      }, 110)
-    } else {
-      snakeDirection(event.key)
-    }
-  }});
+
+function checkDirection() {
+  if (touchendX < touchstartX) {
+    userInput('ArrowLeft')
+  }
+  if (touchendX > touchstartX) {
+    userInput('ArrowRight')
+  }
+}
+
+document.addEventListener('touchstart', e => {
+  touchstartX = e.changedTouches[0].screenX
+})
+
+document.addEventListener('touchend', e => {
+  touchendX = e.changedTouches[0].screenX
+  checkDirection()
+})
+
 playAgain.addEventListener("click", (event) => {
 init();
 gameStarted=false
@@ -61,7 +49,19 @@ pointsCounter=0
 const init = () => {
   createBoard()
 }
-
+const userInput=(input)=>{
+  if (input== 'ArrowLeft' || input == 'ArrowRight') {
+    if (gameStarted == false) {
+      setStartValues()
+      intervalId = window.setInterval(function () {
+        snakeMoving()
+        showBites()
+      }, 110)
+    } else {
+      snakeDirection(input)
+    }
+  }
+}
 const createBoard = () => {
   grid.innerHTML=''
   for (let w = 0; w < boardSize; w++) {
