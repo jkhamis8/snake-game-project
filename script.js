@@ -28,7 +28,7 @@ document.addEventListener('keydown', function (event) {
     }
   }
 })
-document.addEventListener('swiped-left', function(e) {
+document.addEventListener('swiped-left', function(event) {
   if (event.key == 'ArrowLeft' || event.key == 'ArrowRight') {
     if (gameStarted == false) {
       setStartValues()
@@ -40,7 +40,7 @@ document.addEventListener('swiped-left', function(e) {
       snakeDirection(event.key)
     }
   }});
-document.addEventListener('swiped-right', function(e) {
+document.addEventListener('swiped-right', function(event) {
   if (event.key == 'ArrowLeft' || event.key == 'ArrowRight') {
     if (gameStarted == false) {
       setStartValues()
