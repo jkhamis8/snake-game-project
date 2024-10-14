@@ -28,7 +28,30 @@ document.addEventListener('keydown', function (event) {
     }
   }
 })
-
+document.addEventListener('swiped-left', function(e) {
+  if (event.key == 'ArrowLeft' || event.key == 'ArrowRight') {
+    if (gameStarted == false) {
+      setStartValues()
+      intervalId = window.setInterval(function () {
+        snakeMoving()
+        showBites()
+      }, 110)
+    } else {
+      snakeDirection(event.key)
+    }
+  }});
+document.addEventListener('swiped-right', function(e) {
+  if (event.key == 'ArrowLeft' || event.key == 'ArrowRight') {
+    if (gameStarted == false) {
+      setStartValues()
+      intervalId = window.setInterval(function () {
+        snakeMoving()
+        showBites()
+      }, 110)
+    } else {
+      snakeDirection(event.key)
+    }
+  }});
 playAgain.addEventListener("click", (event) => {
 init();
 gameStarted=false
@@ -62,26 +85,7 @@ const setStartValues = () => {
   snakeBody = [[headPosition[0], headPosition[1] + 1]]
   bitePosition[0] = Math.floor(Math.random() * boardSize)
   bitePosition[1] = Math.floor(Math.random() * boardSize)
-  console.log(bitePosition)
   gameStarted = true
-}
-
-const render = () => {
-  snake.forEach((gridWidth, w) => {
-    gridWidth.forEach((value, h) => {
-      if (value == 2) {
-        document.querySelector(`#w${w}h${h}`).classList.add('snakeHead')
-      } else if (value === 1) {
-        document.querySelector(`#w${w}h${h}`).classList.add('snakeBody')
-      } else if (value === 0) {
-        document.querySelector(`#w${w}h${h}`).classList.add('snakeTail')
-      } else if (value === 3) {
-        document.querySelector(`#w${w}h${h}`).classList.add('Bite')
-      } else {
-        document.querySelector(`#w${w}h${h}`).className = 'block'
-      }
-    })
-  })
 }
 
 const snakeDirection = (direction = '') => {
@@ -118,10 +122,6 @@ const snakeDirection = (direction = '') => {
       }
       break
   }
-
-  //console.log(headPosition)
-  //snake[w][theTail] = ''
-  //snake[w][theHead - 1] = ''
 }
 
 const snakeMoving = () => {
@@ -132,7 +132,9 @@ const snakeMoving = () => {
   switch (headDirection) {
     case 'up':
       headPosition[1] = headPosition[1] - 1
-      crashChecker()
+            if(crashChecker()){
+        break
+      }
       document.querySelector(`#w${previousW}h${previousH}`).className = 'block'
       document.querySelector(`#w${headPosition[0]}h${headPosition[1]}`).classList.add('snakeHeadUp')
 
@@ -161,7 +163,9 @@ const snakeMoving = () => {
       break
     case 'down':
       headPosition[1] = headPosition[1] + 1
-      crashChecker()
+            if(crashChecker()){
+        break
+      }
       document.querySelector(`#w${previousW}h${previousH}`).className = 'block'
       document.querySelector(`#w${headPosition[0]}h${headPosition[1]}`).classList.add('snakeHeadDown')
 
@@ -190,7 +194,9 @@ const snakeMoving = () => {
       break
     case 'left':
       headPosition[0] = headPosition[0] - 1
-      crashChecker()
+            if(crashChecker()){
+        break
+      }
       document.querySelector(`#w${previousW}h${previousH}`).className = 'block'
       document.querySelector(`#w${headPosition[0]}h${headPosition[1]}`).classList.add('snakeHeadLeft')
       snakeBody.forEach((value, key) => {
@@ -218,7 +224,9 @@ const snakeMoving = () => {
       break
     case 'right':
       headPosition[0] = headPosition[0] + 1
-      crashChecker()
+            if(crashChecker()){
+        break
+      }
       document.querySelector(`#w${previousW}h${previousH}`).className = 'block'
       document.querySelector(`#w${headPosition[0]}h${headPosition[1]}`).classList.add('snakeHeadRight')
 
@@ -258,16 +266,16 @@ const crashChecker = () => {
   ) {
     alert('you dead')
     clearInterval(intervalId)
+    return true
   }
-
+  return false
 }
+
 const bodyCrashChecker = (bodyW,bodyH) => {
   if (
     headPosition[0] == bodyW &&
     headPosition[1] == bodyH 
   ) {
-    console.log(`#w${headPosition[0]}h${headPosition[1]}body${bodyW}body${bodyH}`);
-    
     alert('you dead')
     clearInterval(intervalId)
   }
@@ -299,9 +307,7 @@ const showBites = () => {
 }
 
 const addSnakeBody = () => {
-  console.log(snakeBody);
   snakeBody[snakeBody.length] = [bitePosition[0], bitePosition[1]]
-
 }
 
 //////////////////main////////////////
