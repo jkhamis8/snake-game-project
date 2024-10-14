@@ -1,6 +1,8 @@
 ////////////////const////////////////////
 let grid = document.querySelector('#grid')
 const playAgain=document.querySelector('#playAgain')
+const endGameDiv =document.querySelector('#endGame')
+const scoreDisplay =document.querySelector('#scoreDisplay')
 const boardSize = 20
 const snake = new Array(boardSize)
   .fill('')
@@ -44,11 +46,13 @@ playAgain.addEventListener("click", (event) => {
 init();
 gameStarted=false
 pointsCounter=0
+endGameDiv.style.display='none'
 });
 //////////////Functions////////////////////
 const init = () => {
   createBoard()
 }
+
 const userInput=(input)=>{
   if (input== 'ArrowLeft' || input == 'ArrowRight') {
     if (gameStarted == false) {
@@ -56,7 +60,7 @@ const userInput=(input)=>{
       intervalId = window.setInterval(function () {
         snakeMoving()
         showBites()
-      }, 110)
+      }, 130)
     } else {
       snakeDirection(input)
     }
@@ -135,6 +139,7 @@ const snakeMoving = () => {
             if(crashChecker()){
         break
       }
+      
       document.querySelector(`#w${previousW}h${previousH}`).className = 'block'
       document.querySelector(`#w${headPosition[0]}h${headPosition[1]}`).classList.add('snakeHeadUp')
 
@@ -159,7 +164,7 @@ const snakeMoving = () => {
           prevBodyH=tempH
         }
       })
-
+      checkBite()
       break
     case 'down':
       headPosition[1] = headPosition[1] + 1
@@ -190,7 +195,7 @@ const snakeMoving = () => {
             prevBodyH=tempH
           }
       })
-
+      checkBite()
       break
     case 'left':
       headPosition[0] = headPosition[0] - 1
@@ -220,7 +225,7 @@ const snakeMoving = () => {
             prevBodyH=tempH
           }
       })
-
+      checkBite()
       break
     case 'right':
       headPosition[0] = headPosition[0] + 1
@@ -250,7 +255,7 @@ const snakeMoving = () => {
             prevBodyH=tempH
           }
       })
-
+      checkBite()
       break
   }
 }
@@ -264,8 +269,7 @@ const crashChecker = () => {
     headPosition[1] == undefined ||
     headPosition[0] == undefined
   ) {
-    alert('you dead')
-    clearInterval(intervalId)
+    endGame()
     return true
   }
   return false
@@ -276,25 +280,17 @@ const bodyCrashChecker = (bodyW,bodyH) => {
     headPosition[0] == bodyW &&
     headPosition[1] == bodyH 
   ) {
-    alert('you dead')
-    clearInterval(intervalId)
+    endGame()
   }
 }
 
+const endGame=()=>{
+  endGameDiv.style.display='block'
+  scoreDisplay.innerHTML=`Your score is ${pointsCounter}`
+  clearInterval(intervalId)
+}
+
 const showBites = () => {
-  if (
-    bitePosition[0] == headPosition[0] &&
-    bitePosition[1] == headPosition[1]
-  ) {
-    addSnakeBody()
-    pointsCounter++
-    document.querySelector(`#w${bitePosition[0]}h${bitePosition[1]}`).className = 'block'
-    bitePosition[0] = Math.floor(Math.random() * boardSize)
-    bitePosition[1] = Math.floor(Math.random() * boardSize)
-    biteTimeCounter=0
-  }else{
-    biteTimeCounter++
-  }
 
   if(biteTimeCounter>35){
     document.querySelector(`#w${bitePosition[0]}h${bitePosition[1]}`).className = 'block'
@@ -304,6 +300,24 @@ const showBites = () => {
   }
 
   document.querySelector(`#w${bitePosition[0]}h${bitePosition[1]}`).classList.add('bite')
+}
+
+const checkBite=()=>{
+  if (
+    bitePosition[0] == headPosition[0] &&
+    bitePosition[1] == headPosition[1]
+  ) {
+    pointsCounter++
+    addSnakeBody()
+    document.querySelector(`#w${bitePosition[0]}h${bitePosition[1]}`).className = 'block snakeBody'
+    console.log(document.querySelector(`#w${bitePosition[0]}h${bitePosition[1]}`).className);
+    
+    bitePosition[0] = Math.floor(Math.random() * boardSize)
+    bitePosition[1] = Math.floor(Math.random() * boardSize)
+    biteTimeCounter=0
+  }else{
+    biteTimeCounter++
+  }
 }
 
 const addSnakeBody = () => {

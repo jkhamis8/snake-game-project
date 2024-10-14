@@ -1,9 +1,10 @@
-html, body {margin: 0; height: 100%; overflow: hidden}
+@font-face { font-family: PixeloidSansBold; src: url('PixeloidSansBold.ttf'); } 
 
+html, body {margin: 0; height: 100%; overflow: hidden;  font-family: "PixeloidSansBold", sans-serif;
+  background-color: gainsboro;
 
-#content {
-  text-align: center;
 }
+
 
 #grid {
   width: 400px;
@@ -13,9 +14,30 @@ html, body {margin: 0; height: 100%; overflow: hidden}
 }
 
 .block {
+  box-sizing: border-box;
   width: 20px;
   height: 20px;
 }
+
+@media only screen and (max-width: 950px) {
+  #grid {
+    width: 380px;
+    height: 400px;
+    display: inline-flex;
+    background-color: black;
+  }
+  
+  .block {
+    box-sizing: border-box;
+    width: 19px;
+    height: 20px;
+  }
+}
+
+#content {
+  text-align: center;
+}
+
 .snakeHeadUp {
   border-top: dashed red;
   background-color: rgb(15, 215, 69);
@@ -40,5 +62,7 @@ html, body {margin: 0; height: 100%; overflow: hidden}
 }
 
 .bite {
-  background-color: rgb(229, 134, 9);
+  background-size: cover;
+  background-image: url("./red-apple-svgrepo-com.png")
+  
 }
