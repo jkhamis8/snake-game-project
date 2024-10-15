@@ -308,10 +308,9 @@ const checkBite=()=>{
     bitePosition[0] == headPosition[0] &&
     bitePosition[1] == headPosition[1]
   ) {
+    document.querySelector(`#w${bitePosition[0]}h${bitePosition[1]}`).className = 'block snakeBody'
     pointsCounter++
     addSnakeBody()
-    document.querySelector(`#w${bitePosition[0]}h${bitePosition[1]}`).className = 'block snakeBody'
-    console.log(document.querySelector(`#w${bitePosition[0]}h${bitePosition[1]}`).className);
     
     bitePosition[0] = Math.floor(Math.random() * boardSize)
     bitePosition[1] = Math.floor(Math.random() * boardSize)
