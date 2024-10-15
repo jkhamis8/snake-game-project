@@ -221,6 +221,7 @@ const snakeMoving = () => {
 
       previousSpot.className = 'block'
       document.querySelector(`#w${headPosition[0]}h${headPosition[1]}`).classList.add('snakeHeadLeft')
+      checkBite()
       snakeBody.forEach((value, key) => {
         bodyCrashChecker(snakeBody[key][0], snakeBody[key][1])
         if (key === 0) {
@@ -344,6 +345,7 @@ const checkBite = () => {
     bitePosition[0] == headPosition[0] &&
     bitePosition[1] == headPosition[1]
   ) {
+    document.querySelector(`#w${bitePosition[0]}h${bitePosition[1]}`).className = 'block snakeBody'
     document.querySelector(`#w${bitePosition[0]}h${bitePosition[1]}`).className = 'block snakeBody'
     pointsCounter++
     addSnakeBody()
