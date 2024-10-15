@@ -1,6 +1,14 @@
-@font-face { font-family: PixeloidSansBold; src: url('PixeloidSansBold.ttf'); } 
+@font-face {
+  font-family: PixeloidSansBold;
+  src: url('PixeloidSansBold.ttf');
+}
 
-html, body {margin: 0; height: 100%; overflow: hidden;  font-family: "PixeloidSansBold", sans-serif;
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: "PixeloidSansBold", sans-serif;
   background-color: gainsboro;
 
 }
@@ -19,6 +27,13 @@ html, body {margin: 0; height: 100%; overflow: hidden;  font-family: "PixeloidSa
   height: 20px;
 }
 
+#playAgain{    
+  font-family: inherit;
+  height: 45px;
+  width: 250px;
+  font-size: x-large;
+}}
+
 @media only screen and (max-width: 950px) {
   #grid {
     width: 380px;
@@ -26,7 +41,7 @@ html, body {margin: 0; height: 100%; overflow: hidden;  font-family: "PixeloidSa
     display: inline-flex;
     background-color: black;
   }
-  
+
   .block {
     box-sizing: border-box;
     width: 19px;
@@ -39,30 +54,92 @@ html, body {margin: 0; height: 100%; overflow: hidden;  font-family: "PixeloidSa
 }
 
 .snakeHeadUp {
-  border-top: dashed red;
-  background-color: rgb(15, 215, 69);
+  background-size: cover;
+  background-image: url("./images/snake-head.png")
 }
+
 .snakeHeadDown {
-  border-bottom: dashed red;
-  background-color: rgb(15, 215, 69);
+  transform: rotate(180deg);
+  background-size: cover;
+  background-image: url("./images/snake-head.png")
 }
+
 .snakeHeadRight {
-  border-right: dashed red;
-  background-color: rgb(15, 215, 69);
+  transform: rotate(90deg);
+  background-size: cover;
+  background-image: url("./images/snake-head.png")
 }
+
 .snakeHeadLeft {
-  border-left: dashed red;
-  background-color: rgb(15, 215, 69);
+  transform: rotate(-90deg);
+  background-size: cover;
+  background-image: url("./images/snake-head.png")
+}
+
+.snakeBodyV {
+  transform: rotate(90deg);
+  background-size: cover;
+  background-image: url("./images/snake-body.png")
 }
 .snakeBody {
-  background-color: rgb(15, 215, 69);
+  background-size: cover;
+  background-image: url("./images/snake-body.png")
 }
-.snakeTail {
-  background-color: rgb(15, 215, 69);
+.turnUpLeft {
+  background-size: cover;
+  background-image: url("./images/snake-turn.png")
+}
+.turnUpRight {
+  background-size: cover;
+  background-image: url("./images/snake-turn.png")
+}
+.turnDownRight {
+  background-size: cover;
+  background-image: url("./images/snake-turn.png")
+}
+.turnDownLeft {
+  background-size: cover;
+  background-image: url("./images/snake-turn.png")
+}
+.turnLeftDown {
+  background-size: cover;
+  background-image: url("./images/snake-turn.png")
+}
+.turnLeftUp {
+  background-size: cover;
+  background-image: url("./images/snake-turn.png")
+}
+.turnRightUp {
+  background-size: cover;
+  background-image: url("./images/snake-turn.png")
+}
+.turnRightDown {
+  background-size: cover;
+  background-image: url("./images/snake-turn.png")
+}
+
+.snakeTailUp {
+
+  background-size: cover;
+  background-image: url("./images/snake-tail.png")
+}
+.snakeTailDown {
+  transform: rotate(180deg);
+  background-size: cover;
+  background-image: url("./images/snake-tail.png")
+}
+.snakeTailLeft {
+  transform: rotate(-90deg);
+  background-size: cover;
+  background-image: url("./images/snake-tail.png")
+}
+.snakeTailRight {
+  transform: rotate(90deg);
+  background-size: cover;
+  background-image: url("./images/snake-tail.png")
 }
 
 .bite {
   background-size: cover;
-  background-image: url("./red-apple-svgrepo-com.png")
-  
+  background-image: url("./images/apple.png")
 }
