@@ -142,8 +142,8 @@ const snakeMoving = () => {
       
       document.querySelector(`#w${previousW}h${previousH}`).className = 'block'
       document.querySelector(`#w${headPosition[0]}h${headPosition[1]}`).classList.add('snakeHeadUp')
-
-      snakeBody.forEach((value, key) => {document.querySelector(`#w${snakeBody[key][0]}h${snakeBody[key][1]}`).className = 'block'
+      checkBite()
+      snakeBody.forEach((value, key) => {
       bodyCrashChecker(snakeBody[key][0],snakeBody[key][1])
       if(key===0){
         document.querySelector(`#w${snakeBody[key][0]}h${snakeBody[key][1]}`).className = 'block'
@@ -164,7 +164,7 @@ const snakeMoving = () => {
           prevBodyH=tempH
         }
       })
-      checkBite()
+      
       break
     case 'down':
       headPosition[1] = headPosition[1] + 1
@@ -173,7 +173,7 @@ const snakeMoving = () => {
       }
       document.querySelector(`#w${previousW}h${previousH}`).className = 'block'
       document.querySelector(`#w${headPosition[0]}h${headPosition[1]}`).classList.add('snakeHeadDown')
-
+      checkBite()
       snakeBody.forEach((value, key) => {
         bodyCrashChecker(snakeBody[key][0],snakeBody[key][1])
         if(key===0){
@@ -195,7 +195,7 @@ const snakeMoving = () => {
             prevBodyH=tempH
           }
       })
-      checkBite()
+      
       break
     case 'left':
       headPosition[0] = headPosition[0] - 1
@@ -204,6 +204,7 @@ const snakeMoving = () => {
       }
       document.querySelector(`#w${previousW}h${previousH}`).className = 'block'
       document.querySelector(`#w${headPosition[0]}h${headPosition[1]}`).classList.add('snakeHeadLeft')
+      checkBite()
       snakeBody.forEach((value, key) => {
         bodyCrashChecker(snakeBody[key][0],snakeBody[key][1])
         if(key===0){
@@ -225,7 +226,7 @@ const snakeMoving = () => {
             prevBodyH=tempH
           }
       })
-      checkBite()
+      
       break
     case 'right':
       headPosition[0] = headPosition[0] + 1
@@ -234,7 +235,7 @@ const snakeMoving = () => {
       }
       document.querySelector(`#w${previousW}h${previousH}`).className = 'block'
       document.querySelector(`#w${headPosition[0]}h${headPosition[1]}`).classList.add('snakeHeadRight')
-
+      checkBite()
       snakeBody.forEach((value, key) => {
         bodyCrashChecker(snakeBody[key][0],snakeBody[key][1])
         if(key===0){
@@ -255,7 +256,7 @@ const snakeMoving = () => {
             prevBodyH=tempH
           }
       })
-      checkBite()
+      
       break
   }
 }
