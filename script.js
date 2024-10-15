@@ -49,7 +49,7 @@ playAgain.addEventListener("click", (event) => {
   pointsCounter = 0
   document.body.style = "background:gainsboro;color:black;"
   endGameDiv.style.display = 'none'
-  playAgain.style.display = ' none'
+  playAgain.style.display = 'none'
 });
 //////////////Functions////////////////////
 const init = () => {
@@ -222,7 +222,6 @@ const snakeMoving = () => {
 
       previousSpot.className = 'block'
       document.querySelector(`#w${headPosition[0]}h${headPosition[1]}`).classList.add('snakeHeadLeft')
-      checkBite()
       snakeBody.forEach((value, key) => {
         bodyCrashChecker(snakeBody[key][0], snakeBody[key][1])
         if (key === 0) {
@@ -347,7 +346,6 @@ const checkBite = () => {
     bitePosition[1] == headPosition[1]
   ) {
     document.querySelector(`#w${bitePosition[0]}h${bitePosition[1]}`).className = 'block snakeBody'
-    document.querySelector(`#w${bitePosition[0]}h${bitePosition[1]}`).className = 'block snakeBody'
     pointsCounter++
     addSnakeBody()
 
@@ -379,7 +377,7 @@ const checkBite = () => {
 }
 
 const addSnakeBody = () => {
-  snakeBody[snakeBody.length] = [bitePosition[0], bitePosition[1]]
+  snakeBody[snakeBody.length] = [snakeBody[snakeBody.length - 1][0], snakeBody[snakeBody.length - 1][1]]
 }
 
 //////////////////main////////////////
