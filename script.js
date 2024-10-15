@@ -3,10 +3,10 @@ let grid = document.querySelector('#grid')
 const playAgain = document.querySelector('#playAgain')
 const endGameDiv = document.querySelector('#endGame')
 const scoreDisplay = document.querySelector('#scoreDisplay')
+const slideContainer = document.querySelector('.slidecontainer')
+const info = document.querySelector('#info')
 const boardSize = 20
-const snake = new Array(boardSize)
-  .fill('')
-  .map(() => new Array(boardSize).fill(''))
+const slider = document.getElementById("myRange");
 
 ///////////////Variables/////////////////
 let gameStarted = false
@@ -19,7 +19,7 @@ let bitePosition = []
 let biteTimeCounter = 0
 let touchstartX = 0
 let touchendX = 0
-
+let difficulty = 130
 ///////////////Listeners//////////////////
 document.addEventListener('keydown', function (event) {
   userInput(event.key)
@@ -50,7 +50,19 @@ playAgain.addEventListener("click", (event) => {
   document.body.style = "background:gainsboro;color:black;"
   endGameDiv.style.display = 'none'
   playAgain.style.display = 'none'
+  info.style.display = 'block'
+  scoreDisplay.innerHTML = `Your score is 0`
+  slideContainer.style.display = "none"
 });
+slider.oninput = function () {
+  if (this.value == 1) {
+    difficulty = 180
+  } else if (this.value == 2) {
+    difficulty = 140
+  } else if (this.value == 3) {
+    difficulty = 100
+  }
+}
 //////////////Functions////////////////////
 const init = () => {
   createBoard()
@@ -63,7 +75,7 @@ const userInput = (input) => {
       intervalId = window.setInterval(function () {
         snakeMoving()
         showBites()
-      }, 130)
+      }, difficulty)
     } else {
       snakeDirection(input)
     }
@@ -308,6 +320,8 @@ const endGame = () => {
   endGameDiv.style.display = 'block'
   playAgain.style.display = ' inline-block'
   document.body.style = "background:black;color:wheat;"
+  info.style.display = 'none'
+  slideContainer.style.display = 'block'
   clearInterval(intervalId)
 }
 
