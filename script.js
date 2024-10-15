@@ -321,7 +321,7 @@ const checkBite=()=>{
 }
 
 const addSnakeBody = () => {
-  snakeBody[snakeBody.length] = [bitePosition[0], bitePosition[1]]
+  snakeBody[snakeBody.length] = snakeBody[snakeBody.length-1][0], snakeBody[snakeBody.length-1][1]]
 }
 
 //////////////////main////////////////
