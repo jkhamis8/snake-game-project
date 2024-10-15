@@ -49,6 +49,7 @@ playAgain.addEventListener("click", (event) => {
   pointsCounter = 0
   document.body.style = "background:gainsboro;color:black;"
   endGameDiv.style.display = 'none'
+  playAgain.style.display = ' none'
 });
 //////////////Functions////////////////////
 const init = () => {
@@ -378,7 +379,7 @@ const checkBite = () => {
 }
 
 const addSnakeBody = () => {
-  snakeBody[snakeBody.length] = [snakeBody[snakeBody.length - 1][0], snakeBody[snakeBody.length - 1][1]]
+  snakeBody[snakeBody.length] = [bitePosition[0], bitePosition[1]]
 }
 
 //////////////////main////////////////
