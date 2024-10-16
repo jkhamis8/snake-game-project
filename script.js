@@ -48,10 +48,10 @@ playAgain.addEventListener("click", () => {
 
 slider.oninput = function () {
   if (this.value == 1) {
-    difficulty = 180
+    difficulty = 190
     biteChangeCount = 42
   } else if (this.value == 2) {
-    difficulty = 140
+    difficulty = 150
     biteChangeCount = 37
   } else if (this.value == 3) {
     difficulty = 100
