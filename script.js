@@ -151,50 +151,33 @@ const snakeMoving = () => {
   let previousH = headPosition[1]
   let snakeHeadClass = ''
   let snakeBodyClass = 'snakeBody'
-  document.querySelector(`#w${previousW}h${previousH}`).className = 'block'
 
   switch (headDirection) {
     case 'up':
       headPosition[1] = headPosition[1] - 1
-      checkBite()
-      if (crashChecker()) {
-        break
-      }
-
       snakeHeadClass = 'snakeHeadUp'
       snakeBodyClass = 'snakeBodyV'
       break
     case 'down':
       headPosition[1] = headPosition[1] + 1
-      checkBite()
-      if (crashChecker()) {
-        break
-      }
-
       snakeHeadClass = 'snakeHeadDown'
       snakeBodyClass = 'snakeBodyV'
       break
     case 'left':
       headPosition[0] = headPosition[0] - 1
-      checkBite()
-      if (crashChecker()) {
-        break
-      }
-
       snakeHeadClass = 'snakeHeadLeft'
       break
     case 'right':
       headPosition[0] = headPosition[0] + 1
-      checkBite()
-      if (crashChecker()) {
-        break
-      }
-
       snakeHeadClass = 'snakeHeadRight'
       break
   }
-  document.querySelector(`#w${headPosition[0]}h${headPosition[1]}`).classList.add(snakeHeadClass)
-  snakeBodyMove(previousW, previousH, snakeBodyClass)
+  checkBite()
+  if (!crashChecker()) {
+      document.querySelector(`#w${previousW}h${previousH}`).className = 'block'
+      document.querySelector(`#w${headPosition[0]}h${headPosition[1]}`).classList.add(snakeHeadClass)
+      snakeBodyMove(previousW, previousH, snakeBodyClass)
+    }
 }
 
 const snakeBodyMove = (previousW, previousH, snakeBodyClass) => {
@@ -202,21 +185,22 @@ const snakeBodyMove = (previousW, previousH, snakeBodyClass) => {
   let prevBodyW = 0
   let prevBodyH = 0
   snakeBody.forEach((value, key) => {
-    bodyCrashChecker(snakeBody[key][0], snakeBody[key][1])
+    bodyCrashChecker(value[0], value[1])
+
+    document.querySelector(`#w${value[0]}h${value[1]}`).className = 'block'
+    
     if (key === 0) {
-      document.querySelector(`#w${snakeBody[key][0]}h${snakeBody[key][1]}`).className = 'block'
       document.querySelector(`#w${previousW}h${previousH}`).classList.add(snakeBodyClass)
-      prevBodyW = snakeBody[key][0]
-      prevBodyH = snakeBody[key][1]
-      snakeBody[key][0] = previousW
-      snakeBody[key][1] = previousH
+      prevBodyW = value[0]
+      prevBodyH = value[1]
+      value[0] = previousW
+      value[1] = previousH
     } else {
-      document.querySelector(`#w${snakeBody[key][0]}h${snakeBody[key][1]}`).className = 'block'
       document.querySelector(`#w${prevBodyW}h${prevBodyH}`).classList.add(snakeBodyClass)
-      let tempW = snakeBody[key][0]
-      let tempH = snakeBody[key][1]
-      snakeBody[key][0] = prevBodyW
-      snakeBody[key][1] = prevBodyH
+      let tempW = value[0]
+      let tempH = value[1]
+      value[0] = prevBodyW
+      value[1] = prevBodyH
       prevBodyW = tempW
       prevBodyH = tempH
     }
@@ -244,7 +228,9 @@ const bodyCrashChecker = (bodyW, bodyH) => {
     headPosition[1] == bodyH
   ) {
     endGame()
+    return true
   }
+  return false
 }
 
 const endGame = () => {
