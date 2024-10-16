@@ -42,7 +42,7 @@ playAgain.addEventListener("click", () => {
   endGameDiv.style.display = 'none'
   playAgain.style.display = 'none'
   info.style.display = 'block'
-  scoreDisplay.style.display = 'none'
+  scoreDisplay.innerHTML= ''
   slideContainer.style.display = "none"
 });
 
